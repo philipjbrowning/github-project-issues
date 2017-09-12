@@ -11,14 +11,14 @@ import {
 } from './overlayActions';
 
 describe('visibilityActions', () => {
-  it('hideApiKeyOverlay should create a HIDE_API_KEY_OVERLAY action', () => {
+  it('hideApiKeyOverlay should create a HIDE_API_SECRET_OVERLAY action', () => {
     expect(hideApiKeyOverlay()).toEqual({
       type: HIDE_API_SECRET_OVERLAY,
       state: OVERLAY_STATE.NONE
     });
   });
   
-  it('showApiKeyOverlay should create a SHOW_API_KEY_OVERLAY action', () => {
+  it('showApiKeyOverlay should create a SHOW_API_SECRET_OVERLAY action', () => {
     expect(showApiKeyOverlay()).toEqual({
       type: SHOW_API_SECRET_OVERLAY,
       state: OVERLAY_STATE.API_SECRET

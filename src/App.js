@@ -18,7 +18,7 @@ class App extends Component {
     };
     
     // Initially show API modal
-    if (!this.state.user.key)
+    if (!this.state.user.secret)
       this.props.dispatch(showApiKeyOverlay());
   }
   
@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <div className="App">
         <ProjectEditOverlay/>
-        <ApiKeyOverlay key={this.state.user.key}/>
+        <ApiKeyOverlay secret={this.state.user.secret}/>
         <NavContainer/>
         <ContentContainer/>
       </div>

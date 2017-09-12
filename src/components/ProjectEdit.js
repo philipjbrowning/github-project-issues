@@ -17,7 +17,7 @@ const ProjectEdit = ({projects, add, remove, update}) => {
       </Modal.Header>
       <Modal.Body>
         <h4>Please enter the project name</h4>
-        <ApiKeyForm onSubmit={this.closeModal} onKeyChange={this.updateKey}/>
+        <ApiKeyForm onSubmit={this.closeModal} onSecretChange={this.updateKey}/>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={this.closeModal}>Close</Button>

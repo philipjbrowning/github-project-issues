@@ -1,10 +1,11 @@
 export const OVERLAY_STATE = {
-  NONE: 0,
-  API_SECRET: 1,
-  ISSUE: 2,
-  PROJECT: 3
+  NONE: 1,
+  API_SECRET: 2,
+  ISSUE: 3,
+  PROJECT: 4
 };
 export const HIDE_API_SECRET_OVERLAY = 'HIDE_API_SECRET_OVERLAY';
+export const MIN_API_SECRET_LENGTH = 16;
 export const SHOW_API_SECRET_OVERLAY = 'SHOW_API_SECRET_OVERLAY';
 
 export const hideApiKeyOverlay = () => ({

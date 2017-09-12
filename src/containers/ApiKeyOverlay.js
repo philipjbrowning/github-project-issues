@@ -8,10 +8,11 @@ import FormControl from "react-bootstrap/es/FormControl";
 import HelpBlock from "react-bootstrap/es/HelpBlock";
 import FormGroup from "react-bootstrap/es/FormGroup";
 import {updateApiKey} from "../actions/userActions";
+import {hideApiKeyOverlay, MIN_API_SECRET_LENGTH, OVERLAY_STATE} from "../actions/overlayActions";
 
-const ApiKeyComponent = ({ key, getValidationState, visibility, validateKey }) => {
+const ApiKeyComponent = ({ secret, updateSecret, validateSecret, visibility }) => {
   return (
-    <Modal show={!key || visibility}>
+    <Modal show={!secret || visibility}>
       <Modal.Header closeButton>
         <Modal.Title>GitHub API Key</Modal.Title>
       </Modal.Header>
@@ -20,11 +21,12 @@ const ApiKeyComponent = ({ key, getValidationState, visibility, validateKey }) =
         <form>
           <FormGroup
             controlId="formBasicText"
-            validationState={getValidationState(key)}>
-            <ControlLabel>Working example with validation</ControlLabel>
+            validationState={getValidationState(secret)}>
+            <ControlLabel>Please enter your API secret to use this application.</ControlLabel>
             <FormControl
               type="text"
-              value={key}
+              value={secret}
+              onChange={event => updateSecret(event.target.value)}
               placeholder="Enter text"
             />
             <FormControl.Feedback />
@@ -33,33 +35,34 @@ const ApiKeyComponent = ({ key, getValidationState, visibility, validateKey }) =
         </form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={validateKey}>Update</Button>
+        <Button onClick={event => validateSecret(secret)}>Update</Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
 ApiKeyComponent.propTypes = {
-  key: PropTypes.string,
+  secret: PropTypes.string,
   validateKey: PropTypes.func,
   visibility: PropTypes.bool
 };
 
-const getValidationState = (key) => {
-  return (key && key.length < 8) ? 'success' : 'error';
-};
+const getValidationState = secret => (secret && secret.length >= MIN_API_SECRET_LENGTH) ? 'success' : 'error';
 
 const mapStateToProps = state => ({
-  key: state.user ? state.user.key : '', // TODO: Reducer should take care of this.
-  visibility: state.visibility
+  secret: state.user.secret,
+  visibility: state.overlayVisibility === OVERLAY_STATE.API_SECRET
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    getValidationState,
-    validateKey: (newKey) => {
-      console.log('validate key');
-      dispatch(updateApiKey(newKey));
+    updateSecret: (secret) => {
+      dispatch(updateApiKey(secret));
+    },
+    validateSecret: (secret) => {
+      if (getValidationState(secret) === 'success') {
+        dispatch(hideApiKeyOverlay());
+      }
     }
   }
 };

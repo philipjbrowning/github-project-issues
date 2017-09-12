@@ -11,11 +11,8 @@ class ApiKeyForm extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   
-  
-  
   handleChange(e) {
-    this.props.onKeyChange(e.target.value);
-    // this.setState({ value: e.target.value });
+    this.props.onSecretChange(e.target.value);
   }
   
   render() {
@@ -27,7 +24,7 @@ class ApiKeyForm extends Component {
           <ControlLabel>Working example with validation</ControlLabel>
           <FormControl
             type="text"
-            value={this.props.key}
+            value={this.props.secret}
             placeholder="Enter text"
             onChange={this.handleChange}
           />
