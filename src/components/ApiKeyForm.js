@@ -11,9 +11,7 @@ class ApiKeyForm extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   
-  getValidationState() {
-    return (this.props.key && this.props.key.length < 256) ? 'success' : 'error';
-  }
+  
   
   handleChange(e) {
     this.props.onKeyChange(e.target.value);

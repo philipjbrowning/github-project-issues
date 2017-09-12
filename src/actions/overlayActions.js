@@ -1,20 +1,20 @@
 export const OVERLAY_STATE = {
   NONE: 0,
-  API_KEY: 1,
+  API_SECRET: 1,
   ISSUE: 2,
   PROJECT: 3
 };
-export const HIDE_API_KEY_OVERLAY = 'HIDE_API_KEY_OVERLAY';
-export const SHOW_API_KEY_OVERLAY = 'SHOW_API_KEY_OVERLAY';
+export const HIDE_API_SECRET_OVERLAY = 'HIDE_API_SECRET_OVERLAY';
+export const SHOW_API_SECRET_OVERLAY = 'SHOW_API_SECRET_OVERLAY';
 
 export const hideApiKeyOverlay = () => ({
-  type: HIDE_API_KEY_OVERLAY,
+  type: HIDE_API_SECRET_OVERLAY,
   state: OVERLAY_STATE.NONE
 });
 
 export const showApiKeyOverlay = () => ({
-  type: SHOW_API_KEY_OVERLAY,
-  state: OVERLAY_STATE.API_KEY
+  type: SHOW_API_SECRET_OVERLAY,
+  state: OVERLAY_STATE.API_SECRET
 });
 
 

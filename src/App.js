@@ -1,35 +1,39 @@
 import React, { Component } from 'react';
 import './App.css';
 import NavContainer from './containers/NavContainer';
-import { Provider } from 'react-redux';
 
 import ApiKeyOverlay from "./containers/ApiKeyOverlay";
 import {showApiKeyOverlay} from "./actions/overlayActions";
 import ProjectEditOverlay from "./containers/ProjectEditOverlay";
-import store from './store';
 import ContentContainer from "./containers/ContentContainer";
+import {connect} from "react-redux";
 
 class App extends Component {
   constructor(props) {
     super(props);
     
+    // Only set the state initially in the constructor
+    this.state = {
+      user: props.user || {} // TOO: Reducer should handle initial state
+    };
+    
     // Initially show API modal
-    if (!store.getState().user.key)
-      store.dispatch(showApiKeyOverlay());
+    if (!this.state.user.key)
+      this.props.dispatch(showApiKeyOverlay());
   }
   
   render() {
     return (
-      <Provider store={store}>
-        <div className="App">
-          <ProjectEditOverlay/>
-          <ApiKeyOverlay key={''}/>
-          <NavContainer/>
-          <ContentContainer/>
-        </div>
-      </Provider>
+      <div className="App">
+        <ProjectEditOverlay/>
+        <ApiKeyOverlay key={this.state.user.key}/>
+        <NavContainer/>
+        <ContentContainer/>
+      </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({ user: state.user });
+
+export default connect(mapStateToProps)(App);

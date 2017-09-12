@@ -1,6 +1,6 @@
-export const UPDATE_API_KEY = 'UPDATE_API_KEY';
+export const UPDATE_API_SECRET = 'UPDATE_API_SECRET';
 
-export const updateApiKey = (key) => ({
-  type: UPDATE_API_KEY,
-  key
+export const updateApiKey = (secret) => ({
+  type: UPDATE_API_SECRET,
+  secret
 });

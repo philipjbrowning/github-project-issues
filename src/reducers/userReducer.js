@@ -1,10 +1,10 @@
-import { UPDATE_API_KEY } from '../actions/userActions';
+import { UPDATE_API_SECRET } from '../actions/userActions';
 
-const userReducer = (state = {key: ''}, action) => {
+const userReducer = (state = { secret: '' }, action) => {
   switch (action.type) {
-    case UPDATE_API_KEY:
+    case UPDATE_API_SECRET:
       return {
-        key: action.key
+        secret: action.secret || ''
       };
     default:
       return state;

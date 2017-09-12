@@ -1,31 +1,29 @@
-import { HIDE_API_KEY_OVERLAY, SHOW_API_KEY_OVERLAY, UPDATE_API_KEY} from '../actions/userActions';
+import { UPDATE_API_SECRET} from '../actions/userActions';
 import userReducer from './userReducer'
 
 describe('userReducer', () => {
-  const visibleState = { key: 'asdf',  visibility: true };
-  const hiddenState = { key: 'asdf',  visibility: false };
+  const initialState = { secret: '' };
+  const otherState = { secret: 'asdfqwerzxcv' };
   
   it('should handle initial state', () => {
     expect(
       userReducer(undefined, {})
-    ).toEqual({ key: '', visibility: false })
+    ).toEqual(initialState)
   });
   
-  it('should handle HIDE_API_KEY_OVERLAY', () => {
+  it('should handle UPDATE_API_SECRET', () => {
+    const secret = 'password';
     expect(
-      userReducer(visibleState, { type: HIDE_API_KEY_OVERLAY })
-    ).toEqual(hiddenState);
+      userReducer(initialState, { type: UPDATE_API_SECRET, secret })
+    ).toEqual({ secret });
     expect(
-      userReducer(hiddenState, { type: HIDE_API_KEY_OVERLAY })
-    ).toEqual(hiddenState);
+      userReducer(otherState, { type: UPDATE_API_SECRET, secret: '' })
+    ).toEqual(initialState);
+    expect(
+      userReducer(otherState, { type: UPDATE_API_SECRET, secret: null })
+    ).toEqual(initialState);
+    expect(
+      userReducer(otherState, { type: UPDATE_API_SECRET, secret: undefined })
+    ).toEqual(initialState);
   });
-  
-  // it('should handle HIDE_API_KEY_OVERLAY', () => {
-  //   expect(
-  //     apiKey(undefined, stateA)
-  //   ).toEqual(stateB);
-  //   expect(
-  //     apiKey(undefined, stateA)
-  //   ).toEqual(stateB);
-  // });
 });

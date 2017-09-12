@@ -1,7 +1,6 @@
 // import * as storage from 'redux-storage';
 // import createEngine from 'redux-storage-engine-localstorage';
-// import logger from 'redux-logger';
-import {createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
 import reducers from "./reducers/index";
 
 // We need to wrap the base reducer, as this is the place where the loaded
@@ -23,7 +22,7 @@ import reducers from "./reducers/index";
 
 // As everything is prepared, we can go ahead and combine all parts as usual
 // const createStoreWithMiddleware = applyMiddleware(middleware)(createStore);
-// this.store = createStoreWithMiddleware(reducer);
+// export default createStoreWithMiddleware(reducer);
 
 // At this stage the whole system is in place and every action will trigger
 // a save operation.
@@ -41,8 +40,9 @@ import reducers from "./reducers/index";
 //   .catch(() => console.log('Failed to load previous state'));
 
 // this.store = createStore(reducers);
+const createStoreWithMiddleware = applyMiddleware()(createStore);
 
-export default createStore(
+export default createStoreWithMiddleware(
   reducers
   // {},
   // applyMiddleware(logger())
