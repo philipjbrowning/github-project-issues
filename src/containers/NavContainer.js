@@ -7,6 +7,7 @@ import Nav from "react-bootstrap/es/Nav";
 import NavItem from "react-bootstrap/es/NavItem";
 import {updateApiKey} from "../actions/userActions";
 import PropTypes from 'prop-types';
+import {showAddProjectOverlay} from "../actions/overlayActions";
 
 const NavComponent = ({ onNewProjectClick, onLogoutClick }) => (
   <Navbar>
@@ -41,7 +42,7 @@ const mapDispatchToProps = dispatch => {
     },
     onNewProjectClick: () => {
       console.log('onNewProjectClick');
-      dispatch(addProject());
+      dispatch(showAddProjectOverlay());
     }
   }
 };

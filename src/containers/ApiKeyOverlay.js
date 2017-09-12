@@ -10,14 +10,14 @@ import FormGroup from "react-bootstrap/es/FormGroup";
 import {updateApiKey} from "../actions/userActions";
 import {hideApiKeyOverlay, MIN_API_SECRET_LENGTH, OVERLAY_STATE} from "../actions/overlayActions";
 
-const ApiKeyComponent = ({ secret, updateSecret, validateSecret, visibility }) => {
+const ApiKeyComponent = ({ secret, getValidationState, updateSecret, validateSecret, visibility }) => {
   return (
     <Modal show={!secret || visibility}>
       <Modal.Header closeButton>
         <Modal.Title>GitHub API Key</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Please enter your GitHub API Key</h4>
+        <h4>GitHub API Key</h4>
         <form>
           <FormGroup
             controlId="formBasicText"
@@ -42,8 +42,10 @@ const ApiKeyComponent = ({ secret, updateSecret, validateSecret, visibility }) =
 };
 
 ApiKeyComponent.propTypes = {
+  getValidationState: PropTypes.func,
   secret: PropTypes.string,
-  validateKey: PropTypes.func,
+  validateSecret: PropTypes.func,
+  updateSecret: PropTypes.func,
   visibility: PropTypes.bool
 };
 
@@ -56,6 +58,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
+    getValidationState,
     updateSecret: (secret) => {
       dispatch(updateApiKey(secret));
     },
