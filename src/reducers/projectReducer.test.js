@@ -11,7 +11,7 @@ describe('projectReducer', () => {
   it('should handle ADD_PROJECT', () => {
     const project = {
       id: 0,
-      title: 'My First Project'
+      name: 'My First Project'
     };
     expect(
       projectReducer([], {

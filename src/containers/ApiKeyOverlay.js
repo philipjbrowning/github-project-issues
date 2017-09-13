@@ -17,7 +17,6 @@ const ApiKeyComponent = ({ secret, getValidationState, updateSecret, validateSec
         <Modal.Title>GitHub API Key</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>GitHub API Key</h4>
         <form>
           <FormGroup
             controlId="formBasicText"

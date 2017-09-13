@@ -8,16 +8,15 @@ import ControlLabel from "react-bootstrap/es/ControlLabel";
 import FormControl from "react-bootstrap/es/FormControl";
 import Button from "react-bootstrap/es/Button";
 import {hideAddProjectOverlay, OVERLAY_STATE} from "../actions/overlayActions";
-import {setProject} from "../actions/currentProjectActions";
+import {clearCurrentProject, setCurrentProject} from "../actions/currentProjectActions";
 
 const ProjectEditComponent = ({ project, getValidationState, saveProject, updateProject, visibility }) => {
   return (
     <Modal show={visibility}>
       <Modal.Header closeButton>
-        <Modal.Title>GitHub Project</Modal.Title>
+        <Modal.Title>GitHub Project Name</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Project Name</h4>
         <form>
           <FormGroup
             controlId="formBasicText"
@@ -58,12 +57,13 @@ const mapDispatchToProps = dispatch => {
   return {
     getValidationState,
     updateProject: (project) => {
-      dispatch(setProject(project))
+      dispatch(setCurrentProject(project))
     },
     saveProject: (project) => {
       if (getValidationState(project) === 'success') {
         dispatch(addProject(project.name));
         dispatch(hideAddProjectOverlay());
+        dispatch(clearCurrentProject());
       }
     }
   }
